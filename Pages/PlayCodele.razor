@@ -10,3 +10,74 @@
 
 <p><strong>Attempt #: @attempts</strong></p>
 
+<table>
+    @foreach (var guess in guesses) 
+    {
+
+    }
+</table>
+
+@code {
+    private List<Guess> guesses = new ();
+    private string? newGuess;
+    private string[]? answers;
+    private string? answer;
+    private int attempts;
+    private string? gameStatusMessage;
+    private bool showModal { get; set; }
+    private bool displayGuessSizeMsg { get; set; }
+
+    protected override async Task OnInitializedAsync() 
+    {
+        showModal = false;
+        attempts = 1;
+        answers = await Http.GetFromJsonAsync<string[]>("sample-data/codele-word-library.json");
+        Random randomGenerator = new Random();
+        answer = answers?[randomGenerator.Next(0, answers.Length)];
+    }
+
+    private void StartNewGame() {
+        showModal = false;
+        guesses.Clear();
+        newGuess = string.Empty;
+        attempts = 1;
+        Random randomGenerator = new Random();
+        answer = answers?[randomGenerator.Next(0, answers.Length)];
+    }
+
+    private void ModalClose() {
+        showModal = false;
+    }
+
+    private void SubmitGuess() {
+        if (newGuess?.Length != 5) displayGuessSizeMsg = true;
+        else {
+            displayGuessSizeMsg = false;
+
+            if (!string.IsNullOrEmpty(newGuess)) {
+                Guess guess = new Guess(newGuess);
+
+                if (attempts < 5) {
+                    guess.GetGuessStatuses(answer);
+
+                    if (guess.IsWinningGuess(answer)) {
+                        showModal = true;
+                        gameStatusMessage = "You won!";
+                    } else {
+                        attempts++;
+                    }
+                }
+                else {
+                    guess.GetGuessStatuses(answer);
+
+                    showModal = true;
+                    gameStatusMessage = "You lost!";
+                }
+
+                guesses.Add(guess);
+
+                newGuess = string.Empty;
+            }
+        }
+    }
+}
