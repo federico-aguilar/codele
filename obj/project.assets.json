@@ -491,6 +491,16 @@
         "build": {
           "buildTransitive/net6.0/System.Text.Json.targets": {}
         }
+      },
+      "CodeleLogic/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "compile": {
+          "bin/placeholder/CodeleLogic.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CodeleLogic.dll": {}
+        }
       }
     },
     "net8.0/browser-wasm": {
@@ -976,6 +986,16 @@
         },
         "build": {
           "buildTransitive/net6.0/System.Text.Json.targets": {}
+        }
+      },
+      "CodeleLogic/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "compile": {
+          "bin/placeholder/CodeleLogic.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CodeleLogic.dll": {}
         }
       }
     }
@@ -2046,10 +2066,16 @@
         "system.text.json.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "CodeleLogic/1.0.0": {
+      "type": "project",
+      "path": "../CodeleLogic/CodeleLogic.csproj",
+      "msbuildProject": "../CodeleLogic/CodeleLogic.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "CodeleLogic >= 1.0.0",
       "Microsoft.AspNetCore.Components.WebAssembly >= 8.0.4",
       "Microsoft.AspNetCore.Components.WebAssembly.DevServer >= 8.0.4",
       "Microsoft.NET.ILLink.Tasks >= 8.0.4",
@@ -2080,7 +2106,11 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "/Users/Jfar/source/repos/codele-devkit-demo/CodeleLogic/CodeleLogic.csproj": {
+              "projectPath": "/Users/Jfar/source/repos/codele-devkit-demo/CodeleLogic/CodeleLogic.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
